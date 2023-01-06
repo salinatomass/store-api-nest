@@ -7,7 +7,7 @@ Startup setup with [Nest.js](https://github.com/nestjs/nest) framework and [Dock
 
 ```bash
 # Clone the project
-$ git clone https://link-to-project
+$ git clone git@github.com:salinatomass/docker-examples.git -b nestjs-app --single-branch nestjs-app
 
 # Go to the project directory
 $ cd nestjs-app
@@ -25,7 +25,6 @@ To run this project, you will need to add the following environment variables to
 `POSTGRES_USER`
 
 `POSTGRES_PASSWORD`
-
 
 ## Run with Docker
 
@@ -56,8 +55,6 @@ $ npm run build
 $ npm run start:prod
 ```
 
-
-
 ## Running Tests
 
 ```bash
@@ -71,17 +68,14 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-
 ## Stay in touch
 
 - Author: [@salinatomass](https://salinatomass.netlify.app)
 - Repository: [Link](https://github.com/salinatomass/docker-examples/tree/master/nestjs-app)
 
-
 ## Support
 
 For support, email salinatomass53@gmail.com.
-
 
 ## License
 
