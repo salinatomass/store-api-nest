@@ -1,10 +1,10 @@
 services:
   api:
     container_name: api
-    image: hotel_manager_api
+    image: nestjs-app
     build:
       context: .
-      dockerfile: ./dist/development.Dockerfile
+      dockerfile: ./build/development.Dockerfile
     ports:
       - '4000:4000'
     volumes:
