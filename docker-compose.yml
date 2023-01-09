@@ -1,12 +1,12 @@
 services:
   api:
     container_name: api
-    image: nestjs-app
+    image: nestjs-with-docker
     build:
       context: .
       dockerfile: ./build/development.Dockerfile
     ports:
-      - '4000:4000'
+      - '3000:3000'
     volumes:
       - .:/usr/src
       - /usr/src/node_modules

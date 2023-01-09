@@ -30,6 +30,6 @@ RUN npm install --omit=dev
 
 COPY --from=builder ["/usr/src/dist/", "/usr/src/"]
 
-EXPOSE 4000
+EXPOSE 3000
 
 CMD ["node", "main.js"]

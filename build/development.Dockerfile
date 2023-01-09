@@ -8,6 +8,6 @@ RUN npm install
 
 COPY [".", "/usr/src/"]
 
-EXPOSE 4000
+EXPOSE 3000
 
 CMD ["npm", "run", "start:dev"]
