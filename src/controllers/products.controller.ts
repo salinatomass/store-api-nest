@@ -9,6 +9,7 @@ import {
   Body,
   HttpStatus,
   HttpCode,
+  ParseIntPipe,
 } from '@nestjs/common';
 
 import { ProductService } from '../services/product.service';
@@ -19,8 +20,8 @@ export class ProductsController {
 
   @Get()
   getAll(
-    @Query('limit') limit = 10,
-    @Query('offset') offset = 0,
+    @Query('limit', ParseIntPipe) limit = 10,
+    @Query('offset', ParseIntPipe) offset = 0,
     @Query('brand') brand: string,
   ) {
     return this.productService.findAll();
@@ -28,8 +29,8 @@ export class ProductsController {
 
   @Get(':productId')
   @HttpCode(HttpStatus.ACCEPTED)
-  getOne(@Param('productId') id: string) {
-    return this.productService.findOne(Number(id));
+  getOne(@Param('productId', ParseIntPipe) id: number) {
+    return this.productService.findOne(id);
   }
 
   @Post()
@@ -38,12 +39,12 @@ export class ProductsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() payload: any) {
-    return this.productService.update(Number(id), payload);
+  update(@Param('id', ParseIntPipe) id: number, @Body() payload: any) {
+    return this.productService.update(id, payload);
   }
 
   @Delete(':id')
-  delete(@Param('id') id: string) {
-    return this.productService.delete(Number(id));
+  delete(@Param('id', ParseIntPipe) id: number) {
+    return this.productService.delete(id);
   }
 }
