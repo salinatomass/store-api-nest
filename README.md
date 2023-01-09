@@ -1,5 +1,4 @@
-
-# Nest.js with Docker
+# Nest.js + PostgreSQL with Docker
 
 Initial setup using [Nest.js](https://github.com/nestjs/nest) framework and [Docker](https://www.docker.com/).
 
@@ -7,10 +6,10 @@ Initial setup using [Nest.js](https://github.com/nestjs/nest) framework and [Doc
 
 ```bash
 # Clone the project
-$ git clone git@github.com:salinatomass/docker-examples.git -b nestjs-app --single-branch nestjs-app
+$ git clone git@github.com:salinatomass/docker-examples.git -b nestjs-app --single-branch my-project
 
 # Go to the project directory
-$ cd nestjs-app
+$ cd my-project
 
 # Install dependencies
 $ npm install
@@ -33,10 +32,10 @@ To run this project, you will need to add the following environment variables to
 $ docker compose up -d
 
 # build
-$ docker build -t nestjs-prod -f ./build/production.Dockerfile .
+$ docker build -t my-project-prod -f ./build/production.Dockerfile .
 
 # production container
-$ docker run -d --name prod -p 4000:4000 nestjs-prod
+$ docker run -d -p 3000:3000 my-project-prod
 ```
 
 ## Run Locally
@@ -71,7 +70,7 @@ $ npm run test:cov
 ## Stay in touch
 
 - Author: [@salinatomass](https://salinatomass.netlify.app)
-- Repository: [Link](https://github.com/salinatomass/docker-examples/tree/master/nestjs-app)
+- Repository: [Link](https://github.com/salinatomass/docker-examples/)
 
 ## Support
 
