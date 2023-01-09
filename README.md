@@ -1,7 +1,7 @@
 
 # Nest.js with Docker
 
-Startup setup with [Nest.js](https://github.com/nestjs/nest) framework and [Docker](https://www.docker.com/).
+Initial setup using [Nest.js](https://github.com/nestjs/nest) framework and [Docker](https://www.docker.com/).
 
 ## Installation
 
