@@ -5,8 +5,6 @@ import { Product } from '../entities/product.entity';
 
 @Injectable()
 export class ProductService {
-  private counterId = 1;
-
   private products: Product[] = [
     {
       id: 1,
@@ -16,7 +14,17 @@ export class ProductService {
       stock: 10,
       image: 'https://someimage.com/1',
     },
+    {
+      id: 2,
+      name: 'Product 2',
+      description: 'bla bla',
+      price: 50,
+      stock: 5,
+      image: 'https://someimage.com/1',
+    },
   ];
+
+  private counterId = this.products[this.products.length - 1].id;
 
   findAll() {
     return this.products;
@@ -36,10 +44,10 @@ export class ProductService {
     return newProduct;
   }
 
-  update(id: number, changes: any) {
+  update(id: number, payload: any) {
     const index = this.products.findIndex((prod) => prod.id === id);
-    if (index === -1) return this.products[0];
-    this.products[index] = { id, ...changes };
+    if (index === -1) return null;
+    this.products[index] = { ...this.products[index], ...payload };
     return this.products[index];
   }
 
