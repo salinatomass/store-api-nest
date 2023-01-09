@@ -7,8 +7,8 @@ import {
   Param,
   Query,
   Body,
-  HttpStatus,
-  HttpCode,
+  // HttpStatus,
+  // HttpCode,
 } from '@nestjs/common';
 
 import { ProductService } from '../services/product.service';
@@ -25,11 +25,12 @@ export class ProductsController {
     @Query('offset', ParseIntPipe) offset = 0,
     @Query('brand') brand: string,
   ) {
+    console.log(limit, offset, brand);
     return this.productService.findAll();
   }
 
   @Get(':productId')
-  @HttpCode(HttpStatus.ACCEPTED)
+  // @HttpCode(HttpStatus.ACCEPTED)
   getOne(@Param('productId', ParseIntPipe) id: number) {
     return this.productService.findOne(id);
   }
