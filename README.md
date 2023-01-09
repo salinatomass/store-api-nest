@@ -1,6 +1,6 @@
 # Nest.js + PostgreSQL with Docker
 
-Initial setup using [Nest.js](https://github.com/nestjs/nest) framework and [Docker](https://www.docker.com/).
+Initial setup using [Nest.js](https://github.com/nestjs/nest) framework and PostgreSQL with [Docker](https://www.docker.com/).
 
 ## Installation
 
