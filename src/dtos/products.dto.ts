@@ -22,6 +22,7 @@ export class CreateProductDto {
   readonly price: number;
 
   @IsNumber()
+  @IsPositive()
   @IsNotEmpty()
   readonly stock: number;
 
@@ -29,6 +30,16 @@ export class CreateProductDto {
   @IsUrl()
   @IsNotEmpty()
   readonly image: string;
+
+  @IsNumber()
+  @IsPositive()
+  @IsNotEmpty()
+  categoryId: number;
+
+  @IsNumber()
+  @IsPositive()
+  @IsNotEmpty()
+  brandId: number;
 }
 
 export class UpdateProductDto extends PartialType(CreateProductDto) {}

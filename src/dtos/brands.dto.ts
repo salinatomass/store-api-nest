@@ -1,7 +1,7 @@
 import { IsString, IsNotEmpty, IsUrl } from 'class-validator';
 import { PartialType } from '@nestjs/mapped-types';
 
-export class CreateCategoryDto {
+export class CreateBrandDto {
   @IsNotEmpty()
   @IsString()
   name: string;
@@ -12,4 +12,4 @@ export class CreateCategoryDto {
   image: string;
 }
 
-export class UpdateCategoryDto extends PartialType(CreateCategoryDto) {}
+export class UpdateBrandDto extends PartialType(CreateBrandDto) {}

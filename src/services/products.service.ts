@@ -13,6 +13,8 @@ export class ProductsService {
       price: 80,
       stock: 10,
       image: 'https://someimage.com/1',
+      categoryId: 1,
+      brandId: 1,
     },
     {
       id: 2,
@@ -21,6 +23,8 @@ export class ProductsService {
       price: 50,
       stock: 5,
       image: 'https://someimage.com/1',
+      categoryId: 1,
+      brandId: 1,
     },
   ];
 

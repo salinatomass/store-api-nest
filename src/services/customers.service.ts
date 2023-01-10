@@ -13,7 +13,7 @@ export class CustomersService {
 
   findOne(id: number) {
     const customer = this.customers.find((item) => item.id === id);
-    if (!customer) throw new NotFoundException('User not found');
+    if (!customer) throw new NotFoundException('Customer not found');
     return customer;
   }
 

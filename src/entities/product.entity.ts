@@ -5,6 +5,6 @@ export class Product {
   price: number;
   stock: number;
   image: string;
-  // categoryId: string;
-  // brandId: string;
+  categoryId: number;
+  brandId: number;
 }
