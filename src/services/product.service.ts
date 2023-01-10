@@ -24,7 +24,7 @@ export class ProductService {
     },
   ];
 
-  private counterId = this.products[this.products.length - 1].id;
+  private counterId = this.products.length;
 
   findAll() {
     return this.products;
