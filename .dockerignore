@@ -13,6 +13,7 @@ build/development.Dockerfile
 .github
 .eslintrc.js
 .prettierrc
+.env-example
 
 README.md
 LICENSE
