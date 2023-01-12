@@ -7,8 +7,9 @@ services:
       dockerfile: ./build/development.Dockerfile
     environment:
       - NODE_ENV=development
+      - PORT=4000
     ports:
-      - '3000:3000'
+      - '4000:4000'
     volumes:
       - .:/usr/src
       - /usr/src/node_modules
