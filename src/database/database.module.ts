@@ -1,15 +1,29 @@
 import { Module, Global } from '@nestjs/common';
-
-const API_KEY = 'abc123456';
+import { Client } from 'pg';
+import { ConfigType } from '@nestjs/config';
+import config from '../config';
 
 @Global()
 @Module({
   providers: [
     {
-      provide: 'API_KEY',
-      useValue: API_KEY,
+      provide: 'PG',
+      useFactory: (configService: ConfigType<typeof config>) => {
+        const { host, port, name, user, password } = configService.database;
+        const client = new Client({
+          host,
+          port: parseInt(port),
+          database: name,
+          user,
+          password,
+        });
+
+        client.connect();
+        return client;
+      },
+      inject: [config.KEY],
     },
   ],
-  exports: ['API_KEY'],
+  exports: ['PG'],
 })
 export class DatabaseModule {}
