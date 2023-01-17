@@ -3,11 +3,11 @@ import { CreateUserDto, UpdateUserDto } from '../dtos/users.dto';
 import { User } from '../entities/user.entity';
 import { Order } from '../entities/order.entity';
 
-import { ProductsService } from 'src/products/services/products.service';
+// import { ProductsService } from 'src/products/services/products.service';
 
 @Injectable()
 export class UsersService {
-  constructor(private productsService: ProductsService) {}
+  // constructor(private productsService: ProductsService) {}
 
   private users: User[] = [];
   private counterId = this.users.length;
@@ -47,7 +47,8 @@ export class UsersService {
     return {
       date: new Date(),
       user,
-      products: this.productsService.findAll(),
+      // products: this.productsService.findAll(),
+      products: [],
     };
   }
 }

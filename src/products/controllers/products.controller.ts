@@ -19,35 +19,30 @@ export class ProductsController {
   constructor(private productsService: ProductsService) {}
 
   @Get()
-  getAll(
-    @Query('limit', ParseIntPipe) limit = 10,
-    @Query('offset', ParseIntPipe) offset = 0,
-    @Query('brand') brand: string,
-  ) {
-    console.log(limit, offset, brand);
+  async getAll() {
     return this.productsService.findAll();
   }
 
   @Get(':productId')
-  getOne(@Param('productId', ParseIntPipe) id: number) {
+  async getOne(@Param('productId', ParseIntPipe) id: number) {
     return this.productsService.findOne(id);
   }
 
-  @Post()
-  create(@Body() payload: CreateProductDto) {
-    return this.productsService.create(payload);
-  }
+  // @Post()
+  // create(@Body() payload: CreateProductDto) {
+  //   return this.productsService.create(payload);
+  // }
 
-  @Patch(':id')
-  update(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() payload: UpdateProductDto,
-  ) {
-    return this.productsService.update(id, payload);
-  }
+  // @Patch(':id')
+  // update(
+  //   @Param('id', ParseIntPipe) id: number,
+  //   @Body() payload: UpdateProductDto,
+  // ) {
+  //   return this.productsService.update(id, payload);
+  // }
 
-  @Delete(':id')
-  delete(@Param('id', ParseIntPipe) id: number) {
-    return this.productsService.delete(id);
-  }
+  // @Delete(':id')
+  // delete(@Param('id', ParseIntPipe) id: number) {
+  //   return this.productsService.delete(id);
+  // }
 }

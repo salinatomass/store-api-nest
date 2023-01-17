@@ -18,6 +18,8 @@ import config from '../config';
           database: name,
           username: user,
           password,
+          synchronize: true,
+          autoLoadEntities: true,
         };
       },
     }),
