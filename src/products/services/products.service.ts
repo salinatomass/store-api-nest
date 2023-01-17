@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Product } from '../entities/product.entity';
-// import { CreateProductDto, UpdateProductDto } from '../dtos/products.dto';
+import { CreateProductDto, UpdateProductDto } from '../dtos/products.dto';
 
 @Injectable()
 export class ProductsService {
@@ -20,26 +20,19 @@ export class ProductsService {
     return product;
   }
 
-  // create(payload: CreateProductDto) {
-  //   this.counterId += 1;
-  //   const newProduct = {
-  //     id: this.counterId,
-  //     ...payload,
-  //   };
-  //   this.products.push(newProduct);
-  //   return newProduct;
-  // }
+  async create(payload: CreateProductDto) {
+    const newProduct = this.productRepo.create(payload);
+    return await this.productRepo.save(newProduct);
+  }
 
-  // update(id: number, payload: UpdateProductDto) {
-  //   const product = this.findOne(id);
-  //   const index = this.products.findIndex((item) => item.id === product.id);
-  //   this.products[index] = { ...product, ...payload };
-  //   return this.products[index];
-  // }
+  async update(id: number, changes: UpdateProductDto) {
+    const product = await this.findOne(id);
+    this.productRepo.merge(product, changes);
+    return this.productRepo.save(product);
+  }
 
-  // delete(id: number) {
-  //   this.findOne(id);
-  //   this.products = this.products.filter((prod) => prod.id !== id);
-  //   return { id };
-  // }
+  async delete(id: number) {
+    await this.findOne(id);
+    return await this.productRepo.delete(id);
+  }
 }
