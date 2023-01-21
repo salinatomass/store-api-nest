@@ -1,39 +1,39 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateCustomerDto, UpdateCustomerDto } from '../dtos/customers.dto';
 import { Customer } from 'src/users/entities/customer.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class CustomersService {
-  private customers: Customer[] = [];
-  private counterId = this.customers.length;
+  constructor(
+    @InjectRepository(Customer) private customerRepo: Repository<Customer>,
+  ) {}
 
-  findAll() {
-    return this.customers;
+  async findAll(): Promise<Customer[]> {
+    return await this.customerRepo.find();
   }
 
-  findOne(id: number) {
-    const customer = this.customers.find((item) => item.id === id);
+  async findOne(id: number) {
+    const customer = await this.customerRepo.findOneBy({ id });
     if (!customer) throw new NotFoundException('Customer not found');
     return customer;
   }
 
-  create(payload: CreateCustomerDto) {
-    this.counterId += 1;
-    const newCustomer = { id: this.counterId, ...payload };
-    this.customers.push(newCustomer);
-    return newCustomer;
+  async create(data: CreateCustomerDto): Promise<Customer> {
+    const customer = this.customerRepo.create(data);
+    return await this.customerRepo.save(customer);
   }
 
-  update(id: number, payload: UpdateCustomerDto) {
-    const customer = this.findOne(id);
-    const index = this.customers.findIndex((item) => item.id === customer.id);
-    this.customers[index] = { ...customer, ...payload };
-    return this.customers[index];
+  async update(id: number, changes: UpdateCustomerDto): Promise<Customer> {
+    const customer = await this.findOne(id);
+    this.customerRepo.merge(customer, changes);
+    return await this.customerRepo.save(customer);
   }
 
-  delete(id: number) {
-    const customer = this.findOne(id);
-    this.customers = this.customers.filter((item) => item.id !== customer.id);
+  async delete(id: number): Promise<Customer> {
+    const customer = await this.findOne(id);
+    await this.customerRepo.delete(id);
     return customer;
   }
 }
