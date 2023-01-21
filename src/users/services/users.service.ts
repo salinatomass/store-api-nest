@@ -5,12 +5,14 @@ import { CreateUserDto, UpdateUserDto } from '../dtos/users.dto';
 import { User } from '../entities/user.entity';
 import { Order } from '../entities/order.entity';
 import { ProductsService } from 'src/products/services/products.service';
+import { CustomersService } from './customers.service';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User) private userRepo: Repository<User>,
     private productsService: ProductsService,
+    private customersService: CustomersService,
   ) {}
 
   async findAll(): Promise<User[]> {
@@ -18,13 +20,20 @@ export class UsersService {
   }
 
   async findOne(id: number): Promise<User> {
-    const user = await this.userRepo.findOneBy({ id });
+    const user = await this.userRepo.findOne({
+      where: { id },
+      relations: ['customer'],
+    });
     if (!user) throw new NotFoundException('User not found');
     return user;
   }
 
   async create(data: CreateUserDto): Promise<User> {
     const newUser = this.userRepo.create(data);
+    if (data.customerId) {
+      const customer = await this.customersService.findOne(data.customerId);
+      newUser.customer = customer;
+    }
     return await this.userRepo.save(newUser);
   }
 
