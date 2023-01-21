@@ -18,22 +18,22 @@ export class BrandsController {
   constructor(private brandsService: BrandsService) {}
 
   @Get()
-  getCategories() {
+  getBrands() {
     return this.brandsService.findAll();
   }
 
-  @Get('/:id/products/')
-  getProductsCategories(@Param('id', ParseIntPipe) categoryId: number) {
-    return this.brandsService.findProducts(categoryId);
+  @Get(':id')
+  getBrand(@Param('id', ParseIntPipe) id: number) {
+    return this.brandsService.findOne(id);
   }
 
   @Post()
-  createCategory(@Body() payload: CreateBrandDto) {
+  createBrand(@Body() payload: CreateBrandDto) {
     return this.brandsService.create(payload);
   }
 
   @Patch(':id')
-  updateCategory(
+  updateBrand(
     @Param('id', ParseIntPipe) id: number,
     @Body() payload: UpdateBrandDto,
   ) {
@@ -41,7 +41,7 @@ export class BrandsController {
   }
 
   @Delete(':id')
-  deleteCategory(@Param('id', ParseIntPipe) id: number) {
+  deleteBrand(@Param('id', ParseIntPipe) id: number) {
     return this.brandsService.delete(id);
   }
 }

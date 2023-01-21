@@ -24,7 +24,7 @@ export class CategoriesService {
   create(payload: CreateCategoryDto) {
     this.counterId += 1;
     const newCategory = { id: this.counterId, ...payload };
-    this.categories.push(newCategory);
+    // this.categories.push(newCategory);
     return newCategory;
   }
 

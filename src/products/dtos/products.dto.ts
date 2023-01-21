@@ -8,44 +8,40 @@ import {
 import { PartialType, ApiProperty } from '@nestjs/swagger';
 
 export class CreateProductDto {
-  @ApiProperty()
   @IsString()
   @IsNotEmpty()
+  @ApiProperty()
   readonly name: string;
 
-  @ApiProperty()
   @IsString()
   @IsNotEmpty()
+  @ApiProperty()
   readonly description: string;
 
-  @ApiProperty()
-  @IsNumber()
   @IsPositive()
   @IsNotEmpty()
+  @ApiProperty()
   readonly price: number;
 
-  @ApiProperty()
-  @IsNumber()
   @IsPositive()
   @IsNotEmpty()
+  @ApiProperty()
   readonly stock: number;
 
-  @ApiProperty()
   @IsString()
   @IsUrl()
   @IsNotEmpty()
+  @ApiProperty()
   readonly image: string;
 
-  @ApiProperty()
-  @IsNumber()
-  @IsPositive()
-  @IsNotEmpty()
-  categoryId: number;
+  // @ApiProperty()
+  // @IsPositive()
+  // @IsNotEmpty()
+  // categoryId: number;
 
-  @ApiProperty()
-  @IsNumber()
   @IsPositive()
   @IsNotEmpty()
+  @ApiProperty()
   brandId: number;
 }
 

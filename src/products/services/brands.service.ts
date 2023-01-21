@@ -15,14 +15,11 @@ export class BrandsService {
   async findOne(id: number): Promise<Brand> {
     const brand = await this.brandRepo.findOne({
       where: { id },
+      relations: ['products'],
     });
     if (!brand) throw new NotFoundException('Brand not found');
     return brand;
   }
-
-  // findProducts(id: number): Promise<Brand> {
-  //   return ['product 1', 'product 2', `product ${id}`];
-  // }
 
   async create(data: CreateBrandDto): Promise<Brand> {
     const brand = this.brandRepo.create(data);
