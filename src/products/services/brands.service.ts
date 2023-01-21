@@ -1,43 +1,43 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateBrandDto, UpdateBrandDto } from '../dtos/brands.dto';
 import { Brand } from '../entities/brand.entity';
 
 @Injectable()
 export class BrandsService {
-  private brands: Brand[] = [];
-  private counterId = this.brands.length;
+  constructor(@InjectRepository(Brand) private brandRepo: Repository<Brand>) {}
 
-  findAll() {
-    return this.brands;
+  async findAll(): Promise<Brand[]> {
+    return await this.brandRepo.find();
   }
 
-  findOne(id: number) {
-    const brand = this.brands.find((item) => item.id === id);
+  async findOne(id: number): Promise<Brand> {
+    const brand = await this.brandRepo.findOne({
+      where: { id },
+    });
     if (!brand) throw new NotFoundException('Brand not found');
     return brand;
   }
 
-  findProducts(id: number) {
-    return ['product 1', 'product 2', `product ${id}`];
+  // findProducts(id: number): Promise<Brand> {
+  //   return ['product 1', 'product 2', `product ${id}`];
+  // }
+
+  async create(data: CreateBrandDto): Promise<Brand> {
+    const brand = this.brandRepo.create(data);
+    return await this.brandRepo.save(brand);
   }
 
-  create(payload: CreateBrandDto) {
-    this.counterId += 1;
-    const newBrand = { id: this.counterId, ...payload };
-    this.brands.push(newBrand);
-    return newBrand;
+  async update(id: number, changes: UpdateBrandDto): Promise<Brand> {
+    const brand = await this.findOne(id);
+    this.brandRepo.merge(brand, changes);
+    return await this.brandRepo.save(brand);
   }
 
-  update(id: number, payload: UpdateBrandDto) {
-    const brand = this.findOne(id);
-    const index = this.brands.findIndex((item) => item.id === brand.id);
-    this.brands[index] = { ...brand, ...payload };
-    return this.brands[index];
-  }
-
-  delete(id: number) {
-    const brand = this.findOne(id);
-    this.brands = this.brands.filter((item) => item.id !== brand.id);
+  async delete(id: number): Promise<Brand> {
+    const brand = await this.findOne(id);
+    await this.brandRepo.delete(brand.id);
     return brand;
   }
 }

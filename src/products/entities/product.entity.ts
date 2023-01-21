@@ -4,7 +4,10 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
 } from 'typeorm';
+
+import { Brand } from './brand.entity';
 
 @Entity()
 export class Product {
@@ -26,15 +29,12 @@ export class Product {
   @Column({ type: 'varchar' })
   image: string;
 
-  @Column({ type: 'int' })
-  categoryId: number;
-
-  @Column({ type: 'int' })
-  brandId: number;
-
   @CreateDateColumn()
   createdAt: Date;
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @ManyToOne(() => Brand, (brand) => brand.products)
+  brand: Brand;
 }
