@@ -1,6 +1,6 @@
 import {
   IsString,
-  IsNumber,
+  IsArray,
   IsPositive,
   IsUrl,
   IsNotEmpty,
@@ -34,15 +34,15 @@ export class CreateProductDto {
   @ApiProperty()
   readonly image: string;
 
-  // @ApiProperty()
-  // @IsPositive()
-  // @IsNotEmpty()
-  // categoryId: number;
-
   @IsPositive()
   @IsNotEmpty()
   @ApiProperty()
-  brandId: number;
+  readonly brandId: number;
+
+  @IsArray()
+  @IsNotEmpty()
+  @ApiProperty()
+  readonly categoriesIds: number[];
 }
 
 export class UpdateProductDto extends PartialType(CreateProductDto) {}

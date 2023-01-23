@@ -22,9 +22,9 @@ export class CategoriesController {
     return this.categoriesService.findAll();
   }
 
-  @Get('/:id/products/')
-  getProductsCategories(@Param('id', ParseIntPipe) categoryId: number) {
-    return this.categoriesService.findProducts(categoryId);
+  @Get(':id')
+  getCategory(@Param('id', ParseIntPipe) id: number) {
+    return this.categoriesService.findOne(id);
   }
 
   @Post()
