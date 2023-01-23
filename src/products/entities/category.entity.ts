@@ -4,7 +4,10 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToMany,
 } from 'typeorm';
+
+import { Product } from './product.entity';
 
 @Entity()
 export class Category {
@@ -14,12 +17,12 @@ export class Category {
   @Column({ type: 'varchar', length: 255, unique: true })
   name: string;
 
-  @Column({ type: 'varchar', length: 255 })
-  image: string;
-
   @CreateDateColumn()
   createdAt: Date;
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @ManyToMany(() => Product, (product) => product.categories)
+  products: Product[];
 }
