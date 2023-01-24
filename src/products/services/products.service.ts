@@ -15,9 +15,7 @@ export class ProductsService {
   ) {}
 
   async findAll() {
-    return await this.productRepo.find({
-      relations: ['brand'],
-    });
+    return await this.productRepo.find();
   }
 
   async findOne(id: number) {
@@ -53,6 +51,12 @@ export class ProductsService {
       if (!brand) throw new NotFoundException('Brand not found');
       product.brand = brand;
     }
+    if (changes.categoriesIds) {
+      const categories = await this.categoryRepo.findBy({
+        id: In(changes.categoriesIds),
+      });
+      product.categories = categories;
+    }
     this.productRepo.merge(product, changes);
     return this.productRepo.save(product);
   }
@@ -60,5 +64,20 @@ export class ProductsService {
   async delete(id: number) {
     await this.findOne(id);
     return await this.productRepo.delete(id);
+  }
+
+  async removeCategoryByProduct(productId: number, categoryId: number) {
+    const product = await this.findOne(productId);
+    product.categories = product.categories.filter(
+      (item) => item.id !== categoryId,
+    );
+    return this.productRepo.save(product);
+  }
+
+  async addCategoryToProduct(productId: number, categoryId: number) {
+    const product = await this.findOne(productId);
+    const category = await this.categoryRepo.findOneBy({ id: categoryId });
+    product.categories.push(category);
+    return this.productRepo.save(product);
   }
 }
