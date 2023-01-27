@@ -15,7 +15,10 @@ export class CustomersService {
   }
 
   async findOne(id: number) {
-    const customer = await this.customerRepo.findOneBy({ id });
+    const customer = await this.customerRepo.findOne({
+      where: { id },
+      relations: ['orders', 'orders.items'],
+    });
     if (!customer) throw new NotFoundException('Customer not found');
     return customer;
   }

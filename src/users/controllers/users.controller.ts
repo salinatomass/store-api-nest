@@ -27,10 +27,10 @@ export class UsersController {
     return this.userService.findOne(id);
   }
 
-  @Get('/:id/orders')
-  getOrders(@Param('id', ParseIntPipe) id: number) {
-    return this.userService.getOrderByUser(id);
-  }
+  // @Get('/:id/orders')
+  // getOrders(@Param('id', ParseIntPipe) id: number) {
+  //   return this.userService.getOrderByUser(id);
+  // }
 
   @Post()
   createUser(@Body() payload: CreateUserDto) {
