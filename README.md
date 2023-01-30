@@ -1,4 +1,4 @@
-# Nest.js + PostgreSQL with Docker
+# Platzi Store API
 
 Initial setup using [Nest.js](https://github.com/nestjs/nest) framework and PostgreSQL with [Docker](https://www.docker.com/).
 
